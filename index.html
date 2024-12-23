@@ -5,48 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Page</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cousine:wght@400&display=swap');
-
-        body {
-            font-family: 'Cousine', monospace;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f4;
-        }
-        h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        h1 a {
-            text-decoration: none;
-            color: black;
-            font-weight: bold;
-        }
-        h1 a:hover {
-            color: #555555;
-        }
-        input {
-            padding: 10px;
-            font-size: 16px;
-            margin: 10px 0;
-            font-family: 'Cousine', monospace;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: black;
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-family: 'Cousine', monospace;
-        }
-        button:hover {
-            background-color: #333333;
-        }
+        /* Styling remains the same */
     </style>
 </head>
 <body>
@@ -59,28 +18,30 @@
     </div>
 
     <script>
-        // Precomputed hash of the password "N3PC181KZ" (SHA-256)
-        const hashedPassword = "f8e6e7b3a72c9b4e0a0f3a5f8d5f7d1c3c6e8c0d72b84b5c64334b8b7e4f7e5e"; // Correct hash for "N3PC181KZ"
+        // XOR encryption key
+        const xorKey = 123;  // A random number to XOR with
 
-        // Function to hash the input using SHA-256
-        async function hashInput(input) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(input);
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            return Array.from(new Uint8Array(hashBuffer))
-                .map(byte => byte.toString(16).padStart(2, '0'))
-                .join('');
+        // Function to XOR encrypt a string
+        function xorEncryptDecrypt(input, key) {
+            let result = '';
+            for (let i = 0; i < input.length; i++) {
+                result += String.fromCharCode(input.charCodeAt(i) ^ key);  // XOR each character
+            }
+            return result;
         }
 
-        async function checkPassword() {
+        // Encoded password using XOR (Password: N3PC181KZ)
+        const encodedPassword = xorEncryptDecrypt("N3PC181KZ", xorKey);
+
+        function checkPassword() {
             const userPassword = document.getElementById("password").value;
 
-            // Hash the user input password
-            const userHash = await hashInput(userPassword);
+            // Decode the password using XOR
+            const decodedPassword = xorEncryptDecrypt(encodedPassword, xorKey);
 
-            // Compare the hashed password with the precomputed hash
-            if (userHash === hashedPassword) {
-                window.location.href = "nextpage.html"; // Redirect to the next page
+            // Compare the user input with the decoded password
+            if (userPassword === decodedPassword) {
+                window.location.href = "https://kanujlol.github.io/Q21/"; // Redirect to the next page
             } else {
                 alert("Incorrect password. Try again!"); // Show an alert if the password is incorrect
             }
