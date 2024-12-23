@@ -5,7 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Password Page</title>
     <style>
-        /* Styling remains the same */
+        @import url('https://fonts.googleapis.com/css2?family=Cousine:wght@400&display=swap');
+
+        body {
+            font-family: 'Cousine', monospace;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: black;
+        }
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        h1 a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        h1 a:hover {
+            color: #555555;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px 0;
+            font-family: 'Cousine', monospace;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-family: 'Cousine', monospace;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #333333;
+        }
     </style>
 </head>
 <body>
@@ -18,32 +63,27 @@
     </div>
 
     <script>
-        // XOR encryption key
-        const xorKey = 123;  // A random number to XOR with
+        const xorKey = 123;  
 
-        // Function to XOR encrypt a string
         function xorEncryptDecrypt(input, key) {
             let result = '';
             for (let i = 0; i < input.length; i++) {
-                result += String.fromCharCode(input.charCodeAt(i) ^ key);  // XOR each character
+                result += String.fromCharCode(input.charCodeAt(i) ^ key);  
             }
             return result;
         }
 
-        // Encoded password using XOR (Password: N3PC181KZ)
         const encodedPassword = xorEncryptDecrypt("N3PC181KZ", xorKey);
 
         function checkPassword() {
             const userPassword = document.getElementById("password").value;
 
-            // Decode the password using XOR
             const decodedPassword = xorEncryptDecrypt(encodedPassword, xorKey);
 
-            // Compare the user input with the decoded password
             if (userPassword === decodedPassword) {
-                window.location.href = "https://kanujlol.github.io/Q21/"; // Redirect to the next page
+                window.location.href = "https://kanujlol.github.io/Q21/"; 
             } else {
-                alert("Incorrect password. Try again!"); // Show an alert if the password is incorrect
+                alert("Incorrect password. Try again!");
             }
         }
     </script>
