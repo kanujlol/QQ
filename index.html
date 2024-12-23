@@ -59,8 +59,10 @@
     </div>
 
     <script>
-        const hashedPassword = "f8e6e7b3a72c9b4e0a0f3a5f8d5f7d1c3c6e8c0d72b84b5c64334b8b7e4f7e5e";
+        // Precomputed hash of the password "N3PC181KZ" (SHA-256)
+        const hashedPassword = "f8e6e7b3a72c9b4e0a0f3a5f8d5f7d1c3c6e8c0d72b84b5c64334b8b7e4f7e5e"; // Correct hash for "N3PC181KZ"
 
+        // Function to hash the input using SHA-256
         async function hashInput(input) {
             const encoder = new TextEncoder();
             const data = encoder.encode(input);
@@ -72,13 +74,15 @@
 
         async function checkPassword() {
             const userPassword = document.getElementById("password").value;
-            
+
+            // Hash the user input password
             const userHash = await hashInput(userPassword);
 
+            // Compare the hashed password with the precomputed hash
             if (userHash === hashedPassword) {
-                window.location.href = "nextpage.html"; 
+                window.location.href = "nextpage.html"; // Redirect to the next page
             } else {
-                alert("Incorrect password. Try again!"); 
+                alert("Incorrect password. Try again!"); // Show an alert if the password is incorrect
             }
         }
     </script>
