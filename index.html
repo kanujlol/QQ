@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Page</title>
+    <title>Password!!!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cousine:wght@400&display=swap');
 
@@ -63,25 +63,18 @@
     </div>
 
     <script>
-        const xorKey = 123;  
+        const encodedPassword = "TjNQQzE4MUs="; 
+        const encodedLink = "aHR0cHM6Ly9rYW51am9sb2wuZ2l0aHViLmlvL1EyMS8=";
 
-        function xorEncryptDecrypt(input, key) {
-            let result = '';
-            for (let i = 0; i < input.length; i++) {
-                result += String.fromCharCode(input.charCodeAt(i) ^ key);  
-            }
-            return result;
+        function decodeBase64(encoded) {
+            return atob(encoded);
         }
-
-        const encodedPassword = xorEncryptDecrypt("N3PC181KZ", xorKey);
-
         function checkPassword() {
             const userPassword = document.getElementById("password").value;
-
-            const decodedPassword = xorEncryptDecrypt(encodedPassword, xorKey);
-
+            const decodedPassword = decodeBase64(encodedPassword);
             if (userPassword === decodedPassword) {
-                window.location.href = "https://kanujlol.github.io/Q21/"; 
+                const decodedLink = decodeBase64(encodedLink);
+                window.location.href = decodedLink;
             } else {
                 alert("Incorrect password. Try again!");
             }
