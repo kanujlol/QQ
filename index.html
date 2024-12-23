@@ -63,18 +63,18 @@
     </div>
 
     <script>
-        const encodedPassword = "TjNQQzE4MUs="; 
-        const encodedLink = "aHR0cHM6Ly9rYW51am9sb2wuZ2l0aHViLmlvL1EyMS8=";
+        const ep = "TjNQQzE4MUs="; 
+        const el = "aHR0cHM6Ly9rYW51am9sb2wuZ2l0aHViLmlvL1EyMS8=";
 
         function decodeBase64(encoded) {
             return atob(encoded);
         }
         function checkPassword() {
             const userPassword = document.getElementById("password").value;
-            const decodedPassword = decodeBase64(encodedPassword);
-            if (userPassword === decodedPassword) {
-                const decodedLink = decodeBase64(encodedLink);
-                window.location.href = decodedLink;
+            const dp = decodeBase64(ep);
+            if (userPassword === dp) {
+                const dl = decodeBase64(el);
+                window.location.href = dl;
             } else {
                 alert("Incorrect password. Try again!");
             }
